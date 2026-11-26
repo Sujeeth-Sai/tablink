@@ -1,0 +1,20 @@
+Verification record - 26 November 2026
+
+PASS: Official scrcpy 5.0.1 win64 archive SHA-256 matches the publisher.
+PASS: 16 packaged runtime files exactly match the official archive.
+PASS: scrcpy.exe is a Windows x64 PE executable; Android server archive is intact.
+PASS: 52 PowerShell syntax, device/service parsing, endpoint validation,
+      pairing-code, native argument-quoting and process execution assertions.
+PASS: installer file-manifest regular expression captures hash and path.
+
+Script checks ran using official PowerShell 7.7.0 on macOS, with a local
+fixture for child-process argv, stdout/stderr drainage and timeout checks.
+Scripts target Windows PowerShell 5.1. This was NOT a live Windows test.
+
+NOT TESTED HERE: Windows installer/shortcut creation, Windows USB driver,
+physical Windows keyboard/mouse capture, or Windows Wi-Fi pairing.
+A Windows PC is not attached to this environment.
+
+This is an official scrcpy-based control kit, not the native Mac TabLink
+application ported to Windows. Edge crossing and Command + Shift + P are
+not implemented in this kit. Left Alt releases the backend's capture.

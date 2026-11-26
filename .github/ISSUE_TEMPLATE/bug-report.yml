@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a problem with a specific platform package.
+body:
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Package
+      options:
+        - macOS native app
+        - Windows control kit
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Release and host OS version
+      placeholder: macOS app 1.4 / Windows kit 1.0.0, plus OS version
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: Tablet model and Android version
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection
+      options:
+        - USB
+        - Wi-Fi
+        - Not connected yet
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected behavior and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Remove pairing codes, private keys, clipboard contents and other personal data before sharing.

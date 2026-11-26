@@ -1,0 +1,12 @@
+TabLink includes the unmodified scrcpy 3.3.4 Android server.
+Copyright (C) 2018-2025 Genymobile
+Copyright (C) 2018-2025 Romain Vimont
+Licensed under the Apache License, Version 2.0.
+https://github.com/Genymobile/scrcpy/tree/v3.3.4
+The license is included in Resources/scrcpy-LICENSE.
+
+TabLink also includes Android Debug Bridge from Google's Android Platform Tools
+37.0.3 for Darwin. Applicable third-party copyright notices and licenses are
+included in Resources/adb-NOTICE.txt. The official SDK Platform Tools source URL
+is recorded in Resources/dependencies.json. These components retain their own
+licenses. The TabLink client source is independently authored.

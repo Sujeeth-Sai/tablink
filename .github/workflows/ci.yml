@@ -1,0 +1,73 @@
+name: Platform checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    name: macOS build and tests
+    runs-on: macos-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: macos
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Fetch pinned runtime
+        run: python3 scripts/fetch-resources.py
+      - name: Core tests and release build
+        run: ./scripts/build-all.sh
+      - name: Watchdog ownership regression
+        run: ./scripts/check-watchdog-disarm.py
+
+  windows:
+    name: Windows PowerShell and setup
+    runs-on: windows-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: powershell
+        working-directory: windows-control-kit
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Fetch pinned runtime
+        run: .\scripts\Get-Runtime.ps1
+      - name: Windows PowerShell 5.1 tests
+        run: .\tests\Test-Scripts.ps1
+      - name: Native executable startup
+        run: |
+          . .\scripts\Common.ps1
+          $script:AdbExecutable = (Resolve-Path .\runtime\adb.exe).Path
+          $result = Invoke-Adb -CommandArguments @('version')
+          if ($result.ExitCode -ne 0 -or $result.Output -notmatch 'Android Debug Bridge') { throw 'ADB startup failed' }
+          Write-Host $result.Output
+          $script:AdbExecutable = (Resolve-Path .\runtime\scrcpy.exe).Path
+          $result = Invoke-Adb -CommandArguments @('--version')
+          if ($result.ExitCode -ne 0 -or $result.Output -notmatch '5\.0\.1') { throw 'scrcpy startup failed' }
+          Write-Host $result.Output
+      - name: Per-user installation and shortcuts
+        run: |
+          .\scripts\New-FileManifest.ps1
+          $desktop = [Environment]::GetFolderPath('DesktopDirectory')
+          if ([string]::IsNullOrWhiteSpace($desktop)) { throw 'Runner desktop profile unavailable' }
+          New-Item -ItemType Directory -Path $desktop -Force | Out-Null
+          .\scripts\Install.ps1
+          $target = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'Programs\TabLink-Windows-Control'
+          if (-not (Test-Path (Join-Path $target 'runtime\scrcpy.exe'))) { throw 'Installed runtime missing' }
+          $shell = New-Object -ComObject WScript.Shell
+          foreach ($name in @('TabLink - USB', 'TabLink - WiFi', 'TabLink - Menu')) {
+            $path = Join-Path $desktop ($name + '.lnk')
+            if (-not (Test-Path $path)) { throw ('Shortcut missing: ' + $name) }
+            $shortcut = $shell.CreateShortcut($path)
+            if (-not $shortcut.Arguments.Contains($target)) { throw ('Shortcut target mismatch: ' + $name) }
+          }
+          Write-Host 'PASS: per-user setup and three desktop shortcuts'

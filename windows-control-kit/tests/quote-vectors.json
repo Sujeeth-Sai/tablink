@@ -1,0 +1,50 @@
+[
+  {
+    "value": "",
+    "expected": "\"\""
+  },
+  {
+    "value": "plain",
+    "expected": "\"plain\""
+  },
+  {
+    "value": "two words",
+    "expected": "\"two words\""
+  },
+  {
+    "value": "C:\\Tablet Control\\runtime\\adb.exe",
+    "expected": "\"C:\\Tablet Control\\runtime\\adb.exe\""
+  },
+  {
+    "value": "C:\\ends with slash\\",
+    "expected": "\"C:\\ends with slash\\\\\""
+  },
+  {
+    "value": "a\"b",
+    "expected": "\"a\\\"b\""
+  },
+  {
+    "value": "a\\\"b",
+    "expected": "\"a\\\\\\\"b\""
+  },
+  {
+    "value": "%LOCALAPPDATA%\\data",
+    "expected": "\"%LOCALAPPDATA%\\data\""
+  },
+  {
+    "value": "tablet.local:34567",
+    "expected": "\"tablet.local:34567\""
+  },
+  {
+    "value": "[fe80::1%12]:4567",
+    "expected": "\"[fe80::1%12]:4567\""
+  },
+  {
+    "value": "012345",
+    "expected": "\"012345\""
+  },
+  {
+    "value": "line\nbreak",
+    "expected": "\"line\nbreak\""
+  }
+]

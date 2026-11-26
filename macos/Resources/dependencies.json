@@ -1,0 +1,15 @@
+{
+  "scrcpy-server": {
+    "version": "3.3.4",
+    "url": "https://github.com/Genymobile/scrcpy/releases/download/v3.3.4/scrcpy-server-v3.3.4",
+    "sha256": "8588238c9a5a00aa542906b6ec7e6d5541d9ffb9b5d0f6e1bc0e365e2303079e"
+  },
+  "adb": {
+    "version": "37.0.3",
+    "url": "https://dl.google.com/android/repository/platform-tools_r37.0.3-darwin.zip",
+    "retrieved": "2026-11-25",
+    "sha256": "a1c4253c2f7336dd3e600689aef1c451ca0c74a614ea8495a79058fcd7299de3",
+    "archive_sha256": "df21339b9371fef9b19264404338dc686f59a88a1dce634b963da344909001d6",
+    "libcxx_sha256": "db91c2f9f5694721dfffa28bb1ab3366a3e3df4d453d17d5d8712bf1e80a5b93"
+  }
+}
