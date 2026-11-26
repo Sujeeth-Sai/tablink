@@ -29,11 +29,14 @@ Before publication:
   process-pipe and timeout assertions passed on macOS with PowerShell 7.7.
 - The setup archive and per-file manifest were verified.
 
-**Still unverified locally:** Windows installer execution, physical Windows
-keyboard/mouse capture and Windows Wi-Fi pairing. Repository CI separately
-checks the Windows scripts and native executables on a hosted Windows runner;
-check the actual workflow result before relying on that validation. A hosted
-runner does not replace testing with a physical tablet.
+Hosted [platform checks passed on 26 November 2026](https://github.com/Sujeeth-Sai/tablink/actions/runs/45758080841):
+
+- macOS: pinned runtime retrieval, core/protocol tests, release build and watchdog regression.
+- Windows: PowerShell 5.1 checks, native ADB/scrcpy startup, per-user installation
+  and all three desktop shortcuts.
+
+**Still unverified:** physical Windows keyboard/mouse capture and Windows
+Wi-Fi pairing. A hosted runner does not replace testing with a physical tablet.
 
 ## Records
 

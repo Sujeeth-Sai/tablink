@@ -21,7 +21,8 @@ Developer ID/notarization. It is provided as an ad-hoc-signed development build.
 - Left Alt releases mouse capture; the icon-only control window remains open.
 
 This is not a native Windows port of TabLink. Mac edge crossing and Command +
-Shift + P are not included. Windows hardware control has not been verified.
+Shift + P are not included. Windows hardware control has not been verified. Hosted Windows script, executable
+startup, installer and shortcut checks passed; see the verification record.
 
 ## Downloads
 
